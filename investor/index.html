@@ -24,12 +24,36 @@
         <p class="text-xl text-slate-300 mb-8">Hybrid Resilience Allocation for Grüner Mars</p>
         
         <div class="grid md:grid-cols-2 gap-8">
+            <!-- Interactive Allocation with Slider -->
             <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800">
-                <h3 class="font-semibold mb-4">Allocation Model</h3>
+                <h3 class="font-semibold mb-4">Interactive Portfolio Slider (DRI Slot 30)</h3>
+                
+                <div class="mb-6">
+                    <label class="block text-sm mb-1">Earth Bio Allocation: <span id="earthVal" class="font-mono font-bold text-emerald-400">65</span>%</label>
+                    <input type="range" id="earthSlider" min="50" max="75" step="1" value="65" 
+                           class="w-full accent-emerald-400" oninput="updateAllocation()">
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>50% (Min Earth)</span>
+                        <span>75% (Max Earth)</span>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm mb-1">Space-Ag / Tech Allocation: <span id="spaceVal" class="font-mono font-bold text-cyan-400">35</span>%</label>
+                    <input type="range" id="spaceSlider" min="25" max="50" step="1" value="35" 
+                           class="w-full accent-cyan-400" oninput="updateAllocation()">
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>25% (Min Space)</span>
+                        <span>50% (Max Space)</span>
+                    </div>
+                </div>
+                
+                <div class="text-xs text-slate-400 mb-4">Note: Sliders are constrained (Earth + Space = 100%). Drag to explore hybrid scenarios.</div>
+                
                 <canvas id="pieChart" width="300" height="300"></canvas>
                 <div class="mt-4 flex gap-6 text-sm">
-                    <div><span class="inline-block w-3 h-3 bg-emerald-400 mr-2"></span>65% Earth Bio</div>
-                    <div><span class="inline-block w-3 h-3 bg-cyan-400 mr-2"></span>35% Space-Ag/Tech</div>
+                    <div><span class="inline-block w-3 h-3 bg-emerald-400 mr-2"></span><span id="earthLabel">65% Earth Bio</span></div>
+                    <div><span class="inline-block w-3 h-3 bg-cyan-400 mr-2"></span><span id="spaceLabel">35% Space-Ag/Tech</span></div>
                 </div>
             </div>
             
@@ -48,16 +72,78 @@
                     <p class="text-sm mt-2">Join the campaign. Contact via rosary.health or GitHub.</p>
                     <button onclick="window.open('https://github.com/Rosary-mom/gruener-mars','_blank')" class="mt-3 px-4 py-2 bg-white text-black rounded-xl text-sm font-medium">Contribute on GitHub</button>
                 </div>
+                
+                <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800 text-sm">
+                    <strong>Current Target:</strong> 65% Earth Bio + 35% Space-Ag<br>
+                    <span class="text-teal-400">Aligned with Grüner Mars 60-70 / 30-40 resilience mandate.</span>
+                </div>
             </div>
         </div>
     </div>
     <script>
-        const ctx = document.getElementById('pieChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: { labels: ['Earth Bio', 'Space-Ag/Tech'], datasets: [{ data: [65,35], backgroundColor: ['#4ade80', '#22d3ee'] }] },
-            options: { responsive: true, cutout: '70%', plugins: { legend: { display: false } } }
-        });
+        let chart;
+        
+        function updateAllocation() {
+            const earthSlider = document.getElementById('earthSlider');
+            const spaceSlider = document.getElementById('spaceSlider');
+            const earthVal = document.getElementById('earthVal');
+            const spaceVal = document.getElementById('spaceVal');
+            const earthLabel = document.getElementById('earthLabel');
+            const spaceLabel = document.getElementById('spaceLabel');
+            
+            let earth = parseInt(earthSlider.value);
+            let space = parseInt(spaceSlider.value);
+            
+            // Keep sum = 100
+            if (earth + space !== 100) {
+                space = 100 - earth;
+                spaceSlider.value = space;
+            }
+            
+            earthVal.textContent = earth;
+            spaceVal.textContent = space;
+            earthLabel.textContent = earth + '% Earth Bio';
+            spaceLabel.textContent = space + '% Space-Ag/Tech';
+            
+            if (chart) {
+                chart.data.datasets[0].data = [earth, space];
+                chart.update();
+            }
+        }
+        
+        function initChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Earth Bio', 'Space-Ag/Tech'],
+                    datasets: [{
+                        data: [65, 35],
+                        backgroundColor: ['#4ade80', '#22d3ee'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '70%',
+                    plugins: { legend: { display: false } }
+                }
+            });
+            
+            // Initial sync
+            const earthSlider = document.getElementById('earthSlider');
+            const spaceSlider = document.getElementById('spaceSlider');
+            earthSlider.value = 65;
+            spaceSlider.value = 35;
+        }
+        
+        // Initialize on load
+        window.onload = function() {
+            initChart();
+            // Attach listeners for bidirectional sync
+            document.getElementById('earthSlider').addEventListener('input', updateAllocation);
+            document.getElementById('spaceSlider').addEventListener('input', updateAllocation);
+        }
     </script>
 </body>
 </html>
