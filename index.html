@@ -182,27 +182,25 @@
         .bio-accent { color: #4ade80; }
         .space-accent { color: #22d3ee; }
         .hybrid-gold { color: #d4af37; }
+        /* === WOW Animations & Cinematic Effects === */
+        .bio-glow {
+            box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2);
+            animation: bioPulse 4s ease-in-out infinite;
+        }
+        @keyframes bioPulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2); }
+            50% { box-shadow: 0 0 16px rgba(20, 184, 166, 0.7), 0 0 32px rgba(34, 211, 238, 0.4); }
+        }
+        .cinematic-hero {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .typing-cursor::after {
+            content: "|";
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        .aos-animate .card { transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
     </style>
-    /* === WOW Animations & Cinematic Effects === */
-    .bio-glow {
-        box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2);
-        animation: bioPulse 4s ease-in-out infinite;
-    }
-    @keyframes bioPulse {
-        0%, 100% { box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2); }
-        50% { box-shadow: 0 0 16px rgba(20, 184, 166, 0.7), 0 0 32px rgba(34, 211, 238, 0.4); }
-    }
-    .cinematic-hero {
-        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .typing-cursor::after {
-        content: "|";
-        animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-    .aos-animate .card { transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-
-</head>
 <body class="bg-[#05080f] text-slate-200">
     <!-- Top Navigation -->
     <nav class="sticky top-0 z-50 bg-[#05080f]/95 backdrop-blur-md border-b border-slate-800">
@@ -289,7 +287,7 @@
         </div>
 
         <!-- OVERVIEW SECTION -->
-        <div id="overview" class="scroll-mt-20 mb-16">
+        <div id="overview" class="scroll-mt-20 mb-16" data-aos="fade-up">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="section-header text-3xl font-semibold tracking-tight">Overview: Hybrid Resilience Model</h2>
                 <div class="text-xs px-3 py-1 rounded-full bg-teal-950 text-teal-400 border border-teal-900">60/40 Allocation</div>
@@ -444,7 +442,7 @@ gantt
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 
                 <!-- Perchlorate -->
-                <div class="tech-card rounded-3xl p-6 card">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-mono text-teal-400">MICROBES</div>
@@ -469,7 +467,7 @@ gantt
                 </div>
 
                 <!-- Radiation -->
-                <div class="tech-card rounded-3xl p-6 card">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-mono text-cyan-400">FUNGI</div>
@@ -497,7 +495,7 @@ gantt
                 </div>
 
                 <!-- Aquaponics -->
-                <div class="tech-card rounded-3xl p-6 card">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-mono text-teal-400">CLOSED LOOP</div>
@@ -520,7 +518,7 @@ gantt
                 </div>
 
                 <!-- Hügelbeete -->
-                <div class="tech-card rounded-3xl p-6 card">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-mono text-emerald-400">REGENERATIVE</div>
@@ -542,7 +540,7 @@ gantt
                 </div>
 
                 <!-- Cyanobacteria & Microbes -->
-                <div class="tech-card rounded-3xl p-6 card">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-mono text-blue-400">PIONEER</div>
@@ -559,7 +557,7 @@ gantt
                 </div>
 
                 <!-- Rosary.health -->
-                <div class="tech-card rounded-3xl p-6 card border border-amber-900/50">
+                <div class="tech-card data-aos="fade-up" rounded-3xl p-6 card border border-amber-900/50">
                     <div>
                         <div class="text-xs font-mono text-amber-400">CONTEMPLATIVE</div>
                         <div class="font-semibold text-lg mt-1">rosary.health Integration</div>
@@ -642,7 +640,7 @@ quadrantChart
         </div>
 
         <!-- DRI SLOT 30 -->
-        <div id="dri" class="scroll-mt-20 mb-12" data-aos="fade-up">
+        <div id="dri" class="scroll-mt-20 mb-12" data-aos="fade-up" data-aos="fade-up">
             <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">DRI Slot 30 Integration</h2>
             
             <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-8">
@@ -1100,5 +1098,6 @@ quadrantChart
         <span>🚀 Explore DRI Slider</span>
     </a>
 
+    <script>if (typeof AOS !== "undefined") AOS.init({duration:700,easing:"ease-out-cubic",once:true}); console.log("%c[WOW] AOS initialized","color:#14b8a6");</script>
 </body>
 </html>
