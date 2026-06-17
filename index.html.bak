@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grüner Mars • Biological Feasibility Roadmap 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --space-black: #05080f;
+            --deep-navy: #0a0f1c;
+            --teal: #14b8a6;
+            --cyan: #22d3ee;
+            --gold: #d4af37;
+            --green: #4ade80;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+        }
+
+        .space-bg {
+            background: linear-gradient(180deg, #05080f 0%, #0a0f1c 100%);
+        }
+
+        .section-header {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #22d3ee;
+            border-bottom: 2px solid #14b8a6;
+        }
+
+        .card {
+            transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                        box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .tech-card {
+            border: 1px solid #1f2937;
+            background: #0a0f1c;
+        }
+
+        .metric {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .mermaid {
+            background: #0a0f1c;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .disclaimer {
+            background: #1a2333;
+            border-left: 4px solid #d4af37;
+        }
+
+        .tab-button {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button.active {
+            color: #22d3ee;
+            border-bottom: 3px solid #14b8a6;
+        }
+
+        .pyramid-layer {
+            transition: all 0.3s ease;
+        }
+        
+        .pyramid-layer:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .data-table {
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            background: #0f1625;
+            color: #67f6ff;
+        }
+
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 280px;
+            background-color: #1a2333;
+            color: #e2e8f0;
+            text-align: left;
+            border-radius: 8px;
+            padding: 12px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -140px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            border: 1px solid #334155;
+            font-size: 0.875rem;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mermaid-container {
+            background: #05080f;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+        }
+
+        .matrix-cell {
+            transition: all 0.2s ease;
+        }
+        
+        .matrix-cell:hover {
+            transform: scale(1.03);
+            filter: brightness(1.15);
+        }
+
+        .stat-number {
+            font-feature-settings: "tnum";
+        }
+
+        .gantt-label {
+            font-size: 0.75rem;
+        }
+
+        footer {
+            background: #05080f;
+        }
+
+        .bio-accent { color: #4ade80; }
+        .space-accent { color: #22d3ee; }
+        .hybrid-gold { color: #d4af37; }
+    </style>
+</head>
+<body class="bg-[#05080f] text-slate-200">
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#05080f]/95 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-x-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
+                            <span class="text-[#05080f] font-bold text-xl">GM</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl font-semibold tracking-tighter">Grüner Mars</span>
+                            <span class="text-xs text-slate-500 ml-1.5 align-super">2026</span>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1 rounded-full bg-slate-900 text-xs font-mono border border-slate-700">v0.8 • MultiPC-Master</div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#overview" class="nav-link text-slate-300 hover:text-white px-2 py-1">Overview</a>
+                    <a href="#stack" class="nav-link text-slate-300 hover:text-white px-2 py-1">Stack</a>
+                    <a href="#timeline" class="nav-link text-slate-300 hover:text-white px-2 py-1">Roadmap</a>
+                    <a href="#technologies" class="nav-link text-slate-300 hover:text-white px-2 py-1">Technologies</a>
+                    <a href="#risks" class="nav-link text-slate-300 hover:text-white px-2 py-1">Risks</a>
+                    <a href="#dri" class="nav-link text-slate-300 hover:text-white px-2 py-1">DRI Slot 30</a>
+                </div>
+                
+                <div class="flex items-center gap-x-3">
+                    <button onclick="exportToPDF()" 
+                            class="flex items-center gap-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-sm font-medium transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H3a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                        </svg>
+                        <span>Export PDF</span>
+                    </button>
+                    <div class="px-3 py-1.5 bg-slate-900 rounded-xl text-xs font-mono border border-slate-700 flex items-center">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse mr-2"></div>
+                        LIVE
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DISCLAIMER BANNER -->
+    <div class="max-w-7xl mx-auto px-6 pt-4">
+        <div class="disclaimer border border-yellow-900/30 rounded-2xl px-5 py-3 flex items-start gap-x-3 text-sm">
+            <div class="text-amber-400 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <div class="flex-1 text-amber-200/90">
+                <span class="font-semibold">SPECULATIVE SCENARIO — NO FINANCIAL ADVICE.</span> 
+                This document is a research synthesis and exploratory roadmap only. All data, projections, and models are hypothetical for discussion purposes. 
+                No investment, mission, or scientific claims are made. Past performance and Earth analogs do not guarantee future results on Mars.
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
+            <div>
+                <div class="inline-flex items-center gap-x-2 text-xs tracking-[3px] font-mono uppercase mb-2 text-teal-400">MULTI-AGENT RESEARCH ARTIFACT • 2026-06-17</div>
+                <h1 class="font-display text-6xl font-semibold tracking-tighter leading-none">Biological Feasibility<br>Roadmap for Grüner Mars</h1>
+                <p class="mt-3 max-w-md text-xl text-slate-400">Hybrid regenerative biology + space-agriculture architecture for long-term Martian resilience</p>
+            </div>
+            <div class="mt-6 md:mt-0 flex items-center gap-x-4">
+                <div class="text-right">
+                    <div class="text-sm text-slate-400">Generation Date</div>
+                    <div class="font-mono text-lg">2026-06-17</div>
+                </div>
+                <div class="h-10 w-px bg-slate-800"></div>
+                <div>
+                    <div class="text-xs text-slate-400">Powered by</div>
+                    <div class="font-medium">Reliable-Resume-X + X-Deep-Researcher</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OVERVIEW SECTION -->
+        <div id="overview" class="scroll-mt-20 mb-16">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="section-header text-3xl font-semibold tracking-tight">Overview: Hybrid Resilience Model</h2>
+                <div class="text-xs px-3 py-1 rounded-full bg-teal-950 text-teal-400 border border-teal-900">60/40 Allocation</div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Summary -->
+                <div class="lg:col-span-7 bg-[#0a0f1c] border border-slate-800 rounded-3xl p-8">
+                    <p class="text-lg leading-relaxed text-slate-300">
+                        Grüner Mars envisions a <span class="text-emerald-400 font-medium">60-70% Earth-style regenerative biology</span> foundation 
+                        combined with <span class="text-cyan-400 font-medium">30-40% space-agriculture and advanced tech</span>. 
+                        This hybrid approach leverages in-situ resource utilization (ISRU), closed-loop systems, and pioneer biology to overcome 
+                        perchlorates, radiation, and resource scarcity.
+                    </p>
+                    
+                    <div class="mt-6 grid grid-cols-3 gap-4">
+                        <div class="bg-[#05080f] rounded-2xl p-4 border border-slate-800">
+                            <div class="text-xs text-slate-400">Core Principle</div>
+                            <div class="font-semibold mt-1">Baumeister, nicht Zuschauer</div>
+                        </div>
+                        <div class="bg-[#05080f] rounded-2xl p-4 border border-slate-800">
+                            <div class="text-xs text-slate-400">Target</div>
+                            <div class="font-semibold mt-1">DRI Slot 30 • ESG Tokens</div>
+                        </div>
+                        <div class="bg-[#05080f] rounded-2xl p-4 border border-slate-800">
+                            <div class="text-xs text-slate-400">Horizon</div>
+                            <div class="font-semibold mt-1">20+ years • Magnifica Humanitas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="lg:col-span-5 bg-[#0a0f1c] border border-slate-800 rounded-3xl p-8">
+                    <div class="text-sm font-medium mb-3 flex items-center justify-between">
+                        <span>Hybrid Allocation</span>
+                        <span class="font-mono text-xs text-slate-500">2026 BASELINE</span>
+                    </div>
+                    <div class="flex justify-center">
+                        <canvas id="hybridChart" width="260" height="260" class="max-w-[240px]"></canvas>
+                    </div>
+                    <div class="flex justify-center gap-x-6 text-sm mt-4">
+                        <div class="flex items-center gap-x-2">
+                            <div class="w-3 h-3 rounded bg-emerald-400"></div>
+                            <span>65% Earth Bio</span>
+                        </div>
+                        <div class="flex items-center gap-x-2">
+                            <div class="w-3 h-3 rounded bg-cyan-400"></div>
+                            <span>35% Space-Ag/Tech</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIOLOGICAL STACK -->
+        <div id="stack" class="scroll-mt-20 mb-16">
+            <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">Biological Stack Pyramid</h2>
+            <p class="text-slate-400 mb-6 max-w-2xl">Layered, self-reinforcing system. Each level builds upon the previous using in-situ resources and closed loops.</p>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Pyramid Visual + Mermaid -->
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                    <div class="lg:col-span-3 bg-[#0a0f1c] border border-slate-800 rounded-3xl p-6">
+                        <div class="space-y-1 text-center">
+                            <!-- Visual Pyramid -->
+                            <div class="pyramid-layer mx-auto w-[92%] bg-emerald-900/70 hover:bg-emerald-800/70 border border-emerald-700 text-sm py-3 rounded-t-2xl font-medium cursor-pointer tooltip" 
+                                 data-tooltip="Full Closed Ecosystem: Integrated habitats + soil + food security">
+                                <span class="font-semibold">Level 5 — Full Closed Ecosystem</span>
+                            </div>
+                            <div class="pyramid-layer mx-auto w-[82%] bg-emerald-800/70 hover:bg-emerald-700/70 border border-emerald-600 text-sm py-3 font-medium cursor-pointer tooltip"
+                                 data-tooltip="3D Fractal Hügelbeete: Mycorrhiza networks, water retention, regenerative soil in 3D geometry">
+                                <span class="font-semibold">Level 4 — 3D Fractal Hügelbeete</span>
+                            </div>
+                            <div class="pyramid-layer mx-auto w-[72%] bg-teal-900/70 hover:bg-teal-800/70 border border-teal-700 text-sm py-3 font-medium cursor-pointer tooltip"
+                                 data-tooltip="Aquaponics + Algae: 40% yield boost, Omega-3 from CO₂, nutrient recycling">
+                                <span class="font-semibold">Level 3 — Aquaponics &amp; Algae Loops</span>
+                            </div>
+                            <div class="pyramid-layer mx-auto w-[62%] bg-cyan-900/70 hover:bg-cyan-800/70 border border-cyan-700 text-sm py-3 font-medium cursor-pointer tooltip"
+                                 data-tooltip="Fungi &amp; Mycelium: Mycotecture + mykorrhiza for shielding, soil building, structure">
+                                <span class="font-semibold">Level 2 — Fungi &amp; Mycelium Networks</span>
+                            </div>
+                            <div class="pyramid-layer mx-auto w-[52%] bg-blue-900/70 hover:bg-blue-800/70 border border-blue-700 text-sm py-3 rounded-b-2xl font-medium cursor-pointer tooltip"
+                                 data-tooltip="Pioneer Microbes: PRB perchlorate reduction, Chroococcidiopsis, Deinococcus radiodurans">
+                                <span class="font-semibold">Level 1 — Pioneer Microbes</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2">
+                        <div class="mermaid-container p-4">
+                            <pre class="mermaid text-xs">
+flowchart TD
+    A[Level 1: Pioneer Microbes<br/>PRB + Chroococcidiopsis] --> B[Level 2: Fungi<br/>Mycotecture + Mykorrhiza]
+    B --> C[Level 3: Aquaponics<br/>Fish + Plants + Algae]
+    C --> D[Level 4: 3D Hügelbeete<br/>Fractal regenerative soil]
+    D --> E[Level 5: Closed Ecosystem<br/>Full habitat resilience]
+    
+    style A fill:#1e3a8a,stroke:#3b82f6,color:#bae6fd
+    style B fill:#164e63,stroke:#14b8a6,color:#a5f3fc
+    style C fill:#0f766e,stroke:#14b8a6,color:#a5f3fc
+    style D fill:#166534,stroke:#4ade80,color:#bbf7d0
+    style E fill:#14532d,stroke:#4ade80,color:#bbf7d0
+                            </pre>
+                        </div>
+                        <div class="text-[10px] text-center text-slate-500 mt-1">Mermaid biological stack flow</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROADMAP TIMELINE -->
+        <div id="timeline" class="scroll-mt-20 mb-16">
+            <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">Roadmap Timeline</h2>
+            
+            <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-6">
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+gantt
+    title Grüner Mars Biological Feasibility Roadmap 2026–2046+
+    dateFormat  YYYY
+    axisFormat  %Y
+    
+    section Short-term (0-5y)
+    Perchlorate PRB & MICP pilot        :2026, 3y
+    Small aquaponics test loops         :2027, 2y
+    Mycotecture prototype               :2028, 3y
+    
+    section Mid-term (5-20y)
+    Integrated closed-loop habitats     :2029, 8y
+    3D Fractal Hügelbeete deployment    :2031, 6y
+    Radiation shielding scale-up        :2033, 7y
+    
+    section Long-term (20y+)
+    Full hybrid regenerative ecosystem  :2038, 12y
+    Surface greening &amp; ESG scaling    :2042, 10y
+    Magnifica Humanitas phase           :2046, 5y
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="mt-3 text-xs text-slate-500 flex gap-x-6">
+                <div>● <span class="text-emerald-400">Short-term</span>: Proof of concept &amp; Earth analogs</div>
+                <div>● <span class="text-cyan-400">Mid-term</span>: Habitat integration &amp; ISRU</div>
+                <div>● <span class="text-amber-400">Long-term</span>: Scalable resilience &amp; terraforming prep</div>
+            </div>
+        </div>
+
+        <!-- KEY TECHNOLOGIES -->
+        <div id="technologies" class="scroll-mt-20 mb-16">
+            <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">Key Technologies</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                
+                <!-- Perchlorate -->
+                <div class="tech-card rounded-3xl p-6 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-mono text-teal-400">MICROBES</div>
+                            <div class="font-semibold text-lg mt-1">Perchlorate PRB + MICP</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-sm font-medium">~70-90%</div>
+                            <div class="text-[10px] text-slate-500">detox potential</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        Perchlorate-reducing bacteria (PRB) convert toxic salts into chloride + oxygen. 
+                        IISc Bangalore MICP produces "space bricks" from regolith.
+                    </div>
+                    <div class="mt-4 text-xs space-y-1">
+                        <div class="flex justify-between tooltip">
+                            <span class="text-slate-400">Key strain</span>
+                            <span class="font-medium text-right">Chroococcidiopsis + adapted Bacillus</span>
+                            <span class="tooltip-text">Cyanobacterium with proven long-term acclimation to perchlorates and Mars-analog conditions (Atacama/Qaidam).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radiation -->
+                <div class="tech-card rounded-3xl p-6 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-mono text-cyan-400">FUNGI</div>
+                            <div class="font-semibold text-lg mt-1">Radiotrophic Fungi + Mycotecture</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-sm font-medium">~2% / layer</div>
+                            <div class="text-[10px] text-slate-500">ISS tested</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        <span class="font-medium">Cladosporium sphaerospermum</span> (Chernobyl fungus) grows faster in radiation and provides active shielding.
+                        NASA Mycotecture grows mycelium-regolith habitats.
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-3 text-xs">
+                        <div class="bg-[#05080f] rounded-xl px-3 py-2 border border-slate-800">
+                            <div class="text-slate-400">ISS result</div>
+                            <div class="font-semibold">+20% growth in micro-g</div>
+                        </div>
+                        <div class="bg-[#05080f] rounded-xl px-3 py-2 border border-slate-800">
+                            <div class="text-slate-400">NIAC Phase</div>
+                            <div class="font-semibold">Phase III • ~$2M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aquaponics -->
+                <div class="tech-card rounded-3xl p-6 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-mono text-teal-400">CLOSED LOOP</div>
+                            <div class="font-semibold text-lg mt-1">Multi-Loop Aquaponics</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-sm font-medium">+40%</div>
+                            <div class="text-[10px] text-slate-500">plant growth</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        Dr. Simon Goddek systems: UASB bioreactors + reverse osmosis for near-complete recycling. 
+                        Algae produce Omega-3 from Mars CO₂.
+                    </div>
+                    <div class="mt-3 text-xs flex flex-wrap gap-2">
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg">Tilapia + shrimp</div>
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg">Algae DHA/EPA</div>
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg">Lava tube habitats</div>
+                    </div>
+                </div>
+
+                <!-- Hügelbeete -->
+                <div class="tech-card rounded-3xl p-6 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-mono text-emerald-400">REGENERATIVE</div>
+                            <div class="font-semibold text-lg mt-1">3D Fractal Hügelbeete</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-sm font-medium">High edge</div>
+                            <div class="text-[10px] text-slate-500">efficiency</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        Hugelkultur mounds with woody base, mycorrhiza networks, water retention and thermal mass. 
+                        Fractal geometry maximizes interfaces in limited habitat volume.
+                    </div>
+                    <div class="mt-3 text-xs">
+                        <span class="text-emerald-400">•</span> Arbuscular mycorrhizal fungi enable chickpeas in 75% regolith simulant<br>
+                        <span class="text-emerald-400">•</span> Bootstrap with aquaponics-derived organic matter
+                    </div>
+                </div>
+
+                <!-- Cyanobacteria & Microbes -->
+                <div class="tech-card rounded-3xl p-6 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-mono text-blue-400">PIONEER</div>
+                            <div class="font-semibold text-lg mt-1">Cyanobacteria &amp; Extremophiles</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        Chroococcidiopsis for perchlorate acclimation and nitrogen fixation. 
+                        Deinococcus radiodurans for extreme radiation tolerance.
+                    </div>
+                    <div class="mt-4 text-xs text-slate-400">
+                        Dual-use: Soil formation + O₂ generation + radiation protection
+                    </div>
+                </div>
+
+                <!-- Rosary.health -->
+                <div class="tech-card rounded-3xl p-6 card border border-amber-900/50">
+                    <div>
+                        <div class="text-xs font-mono text-amber-400">CONTEMPLATIVE</div>
+                        <div class="font-semibold text-lg mt-1">rosary.health Integration</div>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-300">
+                        Magnifica Humanitas layer: Psychological resilience, dignity, and contemplative practices 
+                        embedded in habitat design and crew protocols.
+                    </div>
+                    <div class="mt-4 text-xs">
+                        • Crew mental health in closed systems<br>
+                        • ESG-Spiral-Token alignment with human flourishing
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RISKS & OPPORTUNITIES -->
+        <div id="risks" class="scroll-mt-20 mb-16">
+            <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">Risks &amp; Opportunities Matrix</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Matrix Table -->
+                <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-6">
+                    <table class="data-table w-full text-sm">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-left">Domain</th>
+                                <th class="px-4 py-3 text-left">Risk</th>
+                                <th class="px-4 py-3 text-left">Opportunity</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Perchlorates</td>
+                                <td class="px-4 py-3 text-red-400">Toxicity, slow scaling</td>
+                                <td class="px-4 py-3 text-emerald-400">O₂ generation + MICP bricks</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Radiation</td>
+                                <td class="px-4 py-3 text-red-400">Chronic exposure</td>
+                                <td class="px-4 py-3 text-emerald-400">Active fungal shielding + radiotrophy</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Power / Closure</td>
+                                <td class="px-4 py-3 text-red-400">High LED demand</td>
+                                <td class="px-4 py-3 text-emerald-400">Algae CO₂-to-O₂ + biogas</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">Soil / Ag</td>
+                                <td class="px-4 py-3 text-red-400">Initial sterile regolith</td>
+                                <td class="px-4 py-3 text-emerald-400">Mycorrhiza + 3D fractal efficiency</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mermaid Risk/Opportunity Visual -->
+                <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-6">
+                    <div class="text-sm font-medium mb-2">Quadrant View</div>
+                    <div class="mermaid-container">
+                        <pre class="mermaid">
+quadrantChart
+    title Risk vs Opportunity
+    x-axis Low Impact --> High Impact
+    y-axis Low Probability --> High Probability
+    quadrant-1 "High Opportunity"
+    quadrant-2 "Monitor Closely"
+    quadrant-3 "Low Priority"
+    quadrant-4 "Manage Risk"
+    "Mycotecture": [0.85, 0.75]
+    "PRB + MICP": [0.9, 0.65]
+    "Aquaponics loops": [0.75, 0.8]
+    "3D Hügelbeete": [0.7, 0.55]
+    "Power demands": [0.3, 0.9]
+    "Long-term closure": [0.4, 0.7]
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DRI SLOT 30 -->
+        <div id="dri" class="scroll-mt-20 mb-12">
+            <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">DRI Slot 30 Integration</h2>
+            
+            <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7">
+                        <p class="text-lg">Slot 30 is designated for <span class="font-medium text-amber-300">Green Mars / Aquaponics / Regenerative Bio</span> within the DRI (Regenerativer Generalvertrag 2.0) portfolio.</p>
+                        
+                        <div class="mt-6 space-y-3 text-sm">
+                            <div class="flex gap-x-4">
+                                <div class="w-6 h-6 flex-none rounded bg-amber-900/70 text-amber-300 text-center text-xs leading-6 font-mono mt-0.5">30</div>
+                                <div>Direct allocation to biological feasibility infrastructure and pilot systems.</div>
+                            </div>
+                            <div class="flex gap-x-4">
+                                <div class="w-6 h-6 flex-none rounded bg-amber-900/70 text-amber-300 text-center text-xs leading-6 font-mono mt-0.5">ESG</div>
+                                <div>Biomarker dashboards (dehydrogenase activity, myco health, nutrient cycles) feed ESG-Spiral-Tokens.</div>
+                            </div>
+                            <div class="flex gap-x-4">
+                                <div class="w-6 h-6 flex-none rounded bg-amber-900/70 text-amber-300 text-center text-xs leading-6 font-mono mt-0.5">60/40</div>
+                                <div>Hybrid model enforces 60-70% regenerative Earth bio + 30-40% space-ag / ISRU tech.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 bg-[#05080f] rounded-2xl p-6 border border-slate-700">
+                        <div class="uppercase text-xs tracking-widest text-amber-400 mb-3">Investor Value Drivers</div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex justify-between"><span>Long-horizon resilience</span> <span class="font-mono text-emerald-400">20y+</span></li>
+                            <li class="flex justify-between"><span>Asset-backed tokens</span> <span class="font-mono text-emerald-400">ESG Spiral</span></li>
+                            <li class="flex justify-between"><span>Knowledge IP</span> <span class="font-mono text-emerald-400">Mycotecture + PRB</span></li>
+                            <li class="flex justify-between"><span>Human dignity layer</span> <span class="font-mono text-emerald-400">Magnifica</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM DISCLAIMER -->
+        <div class="disclaimer border border-yellow-900/30 rounded-2xl px-5 py-4 mb-8 text-sm">
+            <div class="flex items-start gap-x-3">
+                <div class="text-amber-400 mt-0.5 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <div class="text-amber-200/90">
+                    <strong>Speculative research artifact only.</strong> All numbers, timelines, and projections are synthesized from public analogs, X discussions, and NASA/ESA research. 
+                    This is not investment advice, mission planning, or scientific validation. Verify independently before any use. 
+                    <span class="font-mono text-xs block mt-1 opacity-75">Generated 2026-06-17 by MultiPC-Master Agent on grok-build-0.1</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-y-4 text-sm">
+                <div class="flex items-center gap-x-5 text-xs">
+                    <span class="font-mono text-slate-500">#GrünerMars</span>
+                    <span class="font-mono text-slate-500">#rosaryhealth</span>
+                    <span class="font-mono text-slate-500">#MagnificaHumanitas</span>
+                    <span class="font-mono text-slate-500">#Bio2</span>
+                    <span class="font-mono text-slate-500">#ESG</span>
+                </div>
+                <div class="text-xs text-slate-500">
+                    Created via Reliable-Resume-X + Artifact-Manager • Home-Network-Agent-Architecture
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind config
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent-teal', '#14b8a6');
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .nav-link { position: relative; }
+                .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -1px; left: 0; background-color: #14b8a6; transition: width 0.2s; }
+                .nav-link:hover:after, .nav-link.active:after { width: 100%; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize Mermaid
+        function initMermaid() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'dark',
+                    themeVariables: {
+                        darkMode: true,
+                        primaryColor: '#14b8a6',
+                        primaryTextColor: '#e2e8f0',
+                        primaryBorderColor: '#334155',
+                        lineColor: '#64748b',
+                        secondaryColor: '#0a0f1c',
+                        tertiaryColor: '#1e2937'
+                    },
+                    flowchart: { curve: 'basis' },
+                    gantt: { 
+                        fontSize: 11,
+                        barHeight: 18
+                    },
+                    quadrantChart: {
+                        chartWidth: 500,
+                        chartHeight: 280
+                    }
+                });
+                
+                // Re-render any mermaid blocks
+                setTimeout(() => {
+                    mermaid.run();
+                }, 300);
+            }
+        }
+
+        // Hybrid Allocation Pie/Donut Chart
+        let hybridChartInstance = null;
+        
+        function initHybridChart() {
+            const ctx = document.getElementById('hybridChart');
+            if (!ctx || typeof Chart === 'undefined') return;
+
+            if (hybridChartInstance) hybridChartInstance.destroy();
+
+            hybridChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Earth Regenerative Bio', 'Space-Ag / Tech'],
+                    datasets: [{
+                        data: [65, 35],
+                        backgroundColor: ['#4ade80', '#22d3ee'],
+                        borderColor: ['#166534', '#164e63'],
+                        borderWidth: 3,
+                        hoverOffset: 12
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '68%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Interactive tooltips for pyramid (additional JS enhancement)
+        function initTooltips() {
+            document.querySelectorAll('.pyramid-layer').forEach(layer => {
+                const tooltipText = layer.getAttribute('data-tooltip');
+                if (tooltipText) {
+                    layer.title = tooltipText; // native fallback
+                }
+            });
+        }
+
+        // Export to PDF (print-optimized)
+        function exportToPDF() {
+            const originalTitle = document.title;
+            document.title = 'Grüner-Mars-Biological-Feasibility-Roadmap-2026';
+            
+            // Add print-specific styles temporarily
+            const printStyle = document.createElement('style');
+            printStyle.id = 'print-style';
+            printStyle.innerHTML = `
+                @media print {
+                    nav, .disclaimer, button, footer { display: none !important; }
+                    body { background: white; color: black; }
+                    .space-bg, .bg-\\[\\#0a0f1c\\], .bg-\\[\\#05080f\\] { background: white !important; }
+                    .border-slate-800 { border-color: #ccc !important; }
+                    .mermaid-container { background: #f8f8f8; }
+                    .card, .tech-card { box-shadow: none; border: 1px solid #ccc; }
+                }
+            `;
+            document.head.appendChild(printStyle);
+            
+            window.print();
+            
+            setTimeout(() => {
+                const ps = document.getElementById('print-style');
+                if (ps) ps.remove();
+                document.title = originalTitle;
+            }, 1000);
+        }
+
+        // Smooth scroll for nav
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // highlight active
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Keyboard shortcut hint
+        function initKeyboardHints() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    const firstLink = document.querySelector('a[href="#overview"]');
+                    if (firstLink) firstLink.click();
+                }
+            });
+        }
+
+        // Main initialization
+        function initializeAll() {
+            initTailwind();
+            initMermaid();
+            initHybridChart();
+            initTooltips();
+            initSmoothScroll();
+            initKeyboardHints();
+            
+            // Mark nav active on scroll (simple)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            document.querySelectorAll('div[id]').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Final touch: console note for devs
+            console.log('%c[Grüner Mars] Self-contained artifact initialized. Mermaid + Chart.js ready.', 'color:#64748b');
+        }
+
+        // Boot
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeAll);
+        } else {
+            initializeAll();
+        }
+    </script>
+</body>
+</html>
