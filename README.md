@@ -86,3 +86,26 @@ MIT License — see [LICENSE](LICENSE)
 ---
 
 *Generated & enhanced by MultiPC-Master Agent (grok-build-0.1) • 2026-06-17*
+## 🚀 WOW Enhancements (June 2026)
+
+### 1. Cinematic Hero Section
+- Big cinematic header with future-style visual.
+- **Grok-Imagine Prompt for Hero Image** (use this to generate high-quality artwork):
+```
+A breathtaking cinematic wide-shot of a futuristic Green Mars habitat at twilight. Glowing translucent regenerative domes with cyanobacterial fields emitting soft green and teal bioluminescence. Mycelium structures weaving between domes like living architecture. Hybrid glow between Earth-like green vegetation and Martian red soil with subtle golden light. Vast crater landscape in background with Earth visible in the sky. Hyper-detailed, sci-fi realism, volumetric lighting, subtle particles, epic scale, in the style of Syd Mead and Denis Villeneuve, deep space black and vibrant teal/cyan/gold palette, 16:9 cinematic composition.
+```
+- Smooth fade-in animations (AOS), subtle parallax, typing effect for the tagline: "Baumeister einer regenerativen Zukunft – hier und auf dem Mars".
+
+### 2. Global Animations
+- AOS (Animate On Scroll) library integrated for card reveals, timeline progress bars, slider.
+- Subtle bio-glow effects (pulsing teal/cyan accents with CSS keyframes).
+
+### 3. Blog Posts Optimization
+- All posts (Mycotecture, Aquaponics, Earth Analogs, Investor) now include reading time estimates, improved formatting, internal cross-links, share buttons, SVG icons, and inline diagrams.
+
+### 4. Overall Polish
+- Floating "Explore DRI Slider" CTA button.
+- Better mobile experience and loading (deferred scripts, optimized SVGs).
+- Enhanced performance and responsive tweaks.
+
+These changes deliver a strong WOW-effect while remaining self-contained.

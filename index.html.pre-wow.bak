@@ -20,10 +20,6 @@
     <meta name="twitter:image" content="https://rosary-mom.github.io/gruener-mars/assets/screenshot-dri-slider.svg">
     
     <link rel="canonical" href="https://rosary-mom.github.io/gruener-mars">
-    
-    <!-- WOW Animations: AOS + custom -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -183,25 +179,6 @@
         .space-accent { color: #22d3ee; }
         .hybrid-gold { color: #d4af37; }
     </style>
-    /* === WOW Animations & Cinematic Effects === */
-    .bio-glow {
-        box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2);
-        animation: bioPulse 4s ease-in-out infinite;
-    }
-    @keyframes bioPulse {
-        0%, 100% { box-shadow: 0 0 8px rgba(20, 184, 166, 0.4), 0 0 16px rgba(34, 211, 238, 0.2); }
-        50% { box-shadow: 0 0 16px rgba(20, 184, 166, 0.7), 0 0 32px rgba(34, 211, 238, 0.4); }
-    }
-    .cinematic-hero {
-        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .typing-cursor::after {
-        content: "|";
-        animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-    .aos-animate .card { transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-
 </head>
 <body class="bg-[#05080f] text-slate-200">
     <!-- Top Navigation -->
@@ -269,8 +246,8 @@
         <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
             <div>
                 <div class="inline-flex items-center gap-x-2 text-xs tracking-[3px] font-mono uppercase mb-2 text-teal-400">MULTI-AGENT RESEARCH ARTIFACT • 2026-06-17</div>
-                <h1 class="font-display text-6xl md:text-7xl font-semibold tracking-tighter leading-none">Biological Feasibility<br><span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-cyan-400 to-emerald-400">Roadmap for Grüner Mars</span></h1>
-                <p id="hero-tagline" class="mt-3 max-w-md text-2xl text-slate-200 font-light tracking-tight">Baumeister einer regenerativen Zukunft – hier und auf dem Mars</p>
+                <h1 class="font-display text-6xl font-semibold tracking-tighter leading-none">Biological Feasibility<br>Roadmap for Grüner Mars</h1>
+                <p class="mt-3 max-w-md text-xl text-slate-400">Hybrid regenerative biology + space-agriculture architecture for long-term Martian resilience</p>
             </div>
             <div class="mt-6 md:mt-0 flex items-center gap-x-4">
                 <div class="text-right">
@@ -435,7 +412,7 @@ gantt
         </div>
 
         <!-- KEY TECHNOLOGIES -->
-        <div id="technologies" class="scroll-mt-20 mb-16" data-aos="fade-up">
+        <div id="technologies" class="scroll-mt-20 mb-16">
             <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">Key Technologies</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -639,7 +616,7 @@ quadrantChart
         </div>
 
         <!-- DRI SLOT 30 -->
-        <div id="dri" class="scroll-mt-20 mb-12" data-aos="fade-up">
+        <div id="dri" class="scroll-mt-20 mb-12">
             <h2 class="section-header text-3xl font-semibold tracking-tight mb-4">DRI Slot 30 Integration</h2>
             
             <div class="bg-[#0a0f1c] border border-slate-800 rounded-3xl p-8">
@@ -899,78 +876,6 @@ quadrantChart
             document.addEventListener('DOMContentLoaded', initializeAll);
         } else {
             initializeAll();
-            // === WOW: Typing Effect for Hero Tagline ===
-            function typeHeroTagline() {
-                const el = document.getElementById("hero-tagline");
-                if (!el) return;
-                const text = el.textContent;
-                el.textContent = "";
-                el.classList.add("typing-cursor");
-                let i = 0;
-                const timer = setInterval(() => {
-                    if (i < text.length) {
-                        el.textContent += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(timer);
-                        el.classList.remove("typing-cursor");
-                    }
-                }, 55);
-            }
-
-            // === WOW: Initialize AOS + Bio Glow + Parallax ===
-            function initWOWAnimations() {
-                if (typeof AOS !== "undefined") {
-                    AOS.init({
-                        duration: 700,
-                        easing: "ease-out-cubic",
-                        once: true,
-                        offset: 60
-                    });
-                }
-
-                // Add bio-glow to key elements
-                const glowSelectors = ".tech-card, .card, .section-header, #hero";
-                document.querySelectorAll(glowSelectors).forEach(el => {
-                    el.classList.add("bio-glow");
-                });
-
-                // Subtle parallax for hero
-                const hero = document.getElementById("hero");
-                if (hero) {
-                    window.addEventListener("scroll", () => {
-                        const scrolled = window.scrollY;
-                        hero.style.transform = `translateY(${scrolled * 0.03}px)`;
-                    }, { passive: true });
-                }
-
-                // Timeline progress animation (IntersectionObserver)
-                const timeline = document.getElementById("timeline");
-                if (timeline) {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                timeline.querySelectorAll("tr").forEach((row, idx) => {
-                                    setTimeout(() => row.classList.add("opacity-100"), idx * 120);
-                                });
-                                observer.disconnect();
-                            }
-                        });
-                    });
-                    observer.observe(timeline);
-                }
-            }
-
-            // Enhance existing init
-            const originalInit = window.initializeAll || function(){};
-            window.initializeAll = function() {
-                originalInit();
-                setTimeout(() => {
-                    typeHeroTagline();
-                    initWOWAnimations();
-                }, 300);
-            };
-
         }
     </script>
         <!-- Latest Updates -->
@@ -985,12 +890,5 @@ quadrantChart
                 <a href="blog/index.html" class="text-teal-400 text-xs mt-2 inline-block">See all updates in Blog →</a>
             </div>
         </div>
-    <!-- Floating WOW CTA: Explore DRI Slider -->
-    <a href="#dri" 
-       class="fixed bottom-6 right-6 z-50 flex items-center gap-x-2 px-5 py-3 bg-gradient-to-r from-teal-400 to-cyan-400 text-black font-semibold rounded-2xl shadow-2xl text-sm hover:scale-105 active:scale-95 transition-all"
-       style="box-shadow: 0 10px 30px -10px rgba(20,184,166,0.5);">
-        <span>🚀 Explore DRI Slider</span>
-    </a>
-
 </body>
 </html>
