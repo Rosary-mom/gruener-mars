@@ -1,0 +1,41 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#05080f"/>
+      <stop offset="100%" style="stop-color:#0a0f1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="60" fill="#0a0f1c"/>
+  <text x="30" y="40" fill="#14b8a6" font-family="Arial" font-size="24" font-weight="bold">DRI Slot 30 • Investor Portal</text>
+  <!-- Sliders -->
+  <rect x="50" y="90" width="550" height="300" fill="#0a0f1c" rx="12"/>
+  <text x="70" y="120" fill="#e2e8f0" font-family="Arial" font-size="18" font-weight="bold">Interactive Portfolio Slider</text>
+  <!-- Earth slider -->
+  <text x="70" y="160" fill="#4ade80" font-family="Arial" font-size="14">Earth Bio: 65%</text>
+  <rect x="70" y="175" width="500" height="18" fill="#1e2937" rx="9"/>
+  <rect x="70" y="175" width="325" height="18" fill="#4ade80" rx="9"/>
+  <circle cx="395" cy="184" r="12" fill="#4ade80"/>
+  <!-- Space slider -->
+  <text x="70" y="230" fill="#22d3ee" font-family="Arial" font-size="14">Space-Ag/Tech: 35%</text>
+  <rect x="70" y="245" width="500" height="18" fill="#1e2937" rx="9"/>
+  <rect x="70" y="245" width="175" height="18" fill="#22d3ee" rx="9"/>
+  <circle cx="245" cy="254" r="12" fill="#22d3ee"/>
+  <!-- Note -->
+  <text x="70" y="300" fill="#64748b" font-family="Arial" font-size="12">Drag sliders • Auto-updates to 100% total • 60-70% Earth recommended</text>
+  <!-- Pie Chart mock -->
+  <rect x="650" y="90" width="500" height="300" fill="#0a0f1c" rx="12"/>
+  <text x="670" y="120" fill="#e2e8f0" font-family="Arial" font-size="18" font-weight="bold">Live Allocation</text>
+  <circle cx="900" cy="240" r="80" fill="#4ade80"/>
+  <circle cx="900" cy="240" r="80" fill="none" stroke="#22d3ee" stroke-width="55" stroke-dasharray="160 200"/>
+  <text x="870" y="250" fill="#fff" font-family="Arial" font-size="20" font-weight="bold">65%</text>
+  <text x="680" y="340" fill="#4ade80" font-family="Arial" font-size="13">65% Earth Bio</text>
+  <text x="680" y="360" fill="#22d3ee" font-family="Arial" font-size="13">35% Space-Ag/Tech</text>
+  <!-- Benefits -->
+  <rect x="50" y="420" width="1100" height="180" fill="#0a0f1c" rx="12"/>
+  <text x="70" y="450" fill="#d4af37" font-family="Arial" font-size="16" font-weight="bold">DRI Slot 30 Benefits</text>
+  <text x="70" y="480" fill="#94a3b8" font-family="Arial" font-size="13">✓ Direct biological infrastructure allocation   ✓ ESG-Spiral-Token biomarker backing</text>
+  <text x="70" y="510" fill="#94a3b8" font-family="Arial" font-size="13">✓ 20+ year resilience horizon   ✓ Mycotecture + PRB IP value</text>
+  <text x="70" y="550" fill="#14b8a6" font-family="Arial" font-size="14">Live Demo: rosary-mom.github.io/gruener-mars/investor  •  #GrünerMars</text>
+</svg>
