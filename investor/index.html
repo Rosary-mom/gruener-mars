@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor / DRI Slot 30 | Grüner Mars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>body { font-family: system-ui; }</style>
+</head>
+<body class="bg-[#05080f] text-slate-200">
+    <nav class="bg-[#0a0f1c] border-b border-slate-800 p-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="../index.html" class="font-bold">← Grüner Mars</a>
+            <div class="flex gap-4 text-sm">
+                <a href="../index.html">Home</a>
+                <a href="../roadmap/index.html">Roadmap</a>
+                <a href="../blog/index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-5xl mx-auto p-8">
+        <h1 class="text-4xl font-bold mb-4">DRI Slot 30 &amp; Investor Portal</h1>
+        <p class="text-xl text-slate-300 mb-8">Hybrid Resilience Allocation for Grüner Mars</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800">
+                <h3 class="font-semibold mb-4">Allocation Model</h3>
+                <canvas id="pieChart" width="300" height="300"></canvas>
+                <div class="mt-4 flex gap-6 text-sm">
+                    <div><span class="inline-block w-3 h-3 bg-emerald-400 mr-2"></span>65% Earth Bio</div>
+                    <div><span class="inline-block w-3 h-3 bg-cyan-400 mr-2"></span>35% Space-Ag/Tech</div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800">
+                    <h3 class="font-semibold">DRI Slot 30 Benefits</h3>
+                    <ul class="mt-3 text-sm space-y-2">
+                        <li>✓ Direct allocation to biological infrastructure</li>
+                        <li>✓ ESG-Spiral-Token backing via biomarkers</li>
+                        <li>✓ 20+ year horizon resilience</li>
+                        <li>✓ Knowledge IP from Mycotecture &amp; PRB</li>
+                    </ul>
+                </div>
+                <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800">
+                    <h3 class="font-semibold">Contribution</h3>
+                    <p class="text-sm mt-2">Join the campaign. Contact via rosary.health or GitHub.</p>
+                    <button onclick="window.open('https://github.com/Rosary-mom/gruener-mars','_blank')" class="mt-3 px-4 py-2 bg-white text-black rounded-xl text-sm font-medium">Contribute on GitHub</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: { labels: ['Earth Bio', 'Space-Ag/Tech'], datasets: [{ data: [65,35], backgroundColor: ['#4ade80', '#22d3ee'] }] },
+            options: { responsive: true, cutout: '70%', plugins: { legend: { display: false } } }
+        });
+    </script>
+</body>
+</html>

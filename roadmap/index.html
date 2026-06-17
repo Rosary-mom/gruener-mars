@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap | Grüner Mars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>body { font-family: system-ui; }</style>
+</head>
+<body class="bg-[#05080f] text-slate-200">
+    <nav class="bg-[#0a0f1c] border-b border-slate-800 p-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="../index.html" class="font-bold">← Grüner Mars</a>
+            <div class="flex gap-4 text-sm">
+                <a href="../index.html">Home</a>
+                <a href="../blog/index.html">Blog</a>
+                <a href="../investor/index.html">Investor</a>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-6xl mx-auto p-8">
+        <h1 class="text-4xl font-bold mb-4">Detailed Roadmap</h1>
+        <p class="text-slate-400 mb-8">Interactive Gantt-style timeline for biological feasibility.</p>
+        
+        <div class="bg-[#0a0f1c] p-6 rounded-3xl border border-slate-800">
+            <pre class="mermaid">
+gantt
+    title Grüner Mars Biological Feasibility Roadmap 2026–2046+
+    dateFormat  YYYY
+    axisFormat  %Y
+    section Short-term (0-5y)
+    Perchlorate PRB & MICP pilot        :2026, 3y
+    Small aquaponics test loops         :2027, 2y
+    Mycotecture prototype               :2028, 3y
+    section Mid-term (5-20y)
+    Integrated closed-loop habitats     :2029, 8y
+    3D Fractal Hügelbeete deployment    :2031, 6y
+    Radiation shielding scale-up        :2033, 7y
+    section Long-term (20y+)
+    Full hybrid regenerative ecosystem  :2038, 12y
+    Surface greening & ESG scaling      :2042, 10y
+    Magnifica Humanitas phase           :2046, 5y
+            </pre>
+        </div>
+        
+        <div class="mt-8">
+            <h3 class="font-semibold mb-2">Filters (Demo)</h3>
+            <div class="flex gap-2">
+                <button onclick="filterPhase('short')" class="px-3 py-1 bg-teal-600 rounded text-sm">Short-term</button>
+                <button onclick="filterPhase('mid')" class="px-3 py-1 bg-cyan-600 rounded text-sm">Mid-term</button>
+                <button onclick="filterPhase('long')" class="px-3 py-1 bg-amber-600 rounded text-sm">Long-term</button>
+                <button onclick="filterPhase('all')" class="px-3 py-1 bg-slate-600 rounded text-sm">All</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        mermaid.initialize({startOnLoad:true, theme:'dark'});
+        function filterPhase(phase) {
+            alert('Filter demo: ' + phase + ' phase highlighted (implement with JS in full version)');
+        }
+    </script>
+</body>
+</html>
